@@ -17,7 +17,7 @@ resource "aws_security_group" "db-sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["192.168.1.0/24"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
     Name = "Open port 3306"

@@ -19,7 +19,7 @@ resource "aws_db_instance" "Dbpractice" {
   db_subnet_group_name = aws_db_subnet_group.Data_subg.name
   db_name              = var.db_name
   username             = "Luffy"
-  password             = "Mughiwara123"
+  password             = jsondecode(data.aws_secretsmanager_secret_version.mysql_passwd_version.secret_string)["password"]
   backup_retention_period =var.backup_retention_period
   skip_final_snapshot  = true
 }

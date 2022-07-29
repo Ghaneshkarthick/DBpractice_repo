@@ -16,17 +16,10 @@ data "aws_subnet" "data" {
     values = ["Data_Subnet"]
   }
 }
-# data "github_actions_public_key" "credentials" {
-#   repository = "DBpractice_repo"
-# }
+data "aws_secretsmanager_secret" "mysqldb_pw" {
+  name = "mmysqldb_pw"
+}
 
-# resource "github_actions_secret" "username" {
-#   repository       = "DBpractice_repo"
-#   secret_name      = "USERNAME"
-  
-# }
-
-# resource "github_actions_secret" "password" {
-#   repository       = "DBpractice_repo"
-#   secret_name      = "PASSWORD"
-# }
+data "aws_secretsmanager_secret_version" "mysqldb_pw" {
+  secret_id = data.aws_secretsmanager_secret.mysqldb_pw.id
+}
